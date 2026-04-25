@@ -1,0 +1,44 @@
+.section {
+  padding: 120px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-top: 1px solid var(--line);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.heading {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.sub {
+  font-size: 0.95rem;
+  color: var(--ink2);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}

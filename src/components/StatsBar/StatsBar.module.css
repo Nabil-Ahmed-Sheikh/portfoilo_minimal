@@ -1,0 +1,49 @@
+.bar {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.stat {
+  padding: 48px;
+  border-right: 1px solid var(--line);
+  text-align: center;
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.num {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.label {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+
+@media (max-width: 768px) {
+  .bar {
+    grid-template-columns: 1fr;
+  }
+
+  .stat {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat:last-child {
+    border-bottom: none;
+  }
+}

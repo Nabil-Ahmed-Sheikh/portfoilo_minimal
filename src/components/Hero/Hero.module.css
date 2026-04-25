@@ -1,0 +1,145 @@
+.hero {
+  padding-top: 160px;
+  padding-bottom: 100px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 64px;
+  align-items: end;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 48px;
+  padding-right: 48px;
+}
+
+.text {
+  width: 100%;
+}
+
+.heading {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+
+.em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.bio {
+  font-size: 1.05rem;
+  color: var(--ink2);
+  max-width: 480px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+.ctas {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.cta:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.ctaGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border: 1px solid var(--line);
+  color: var(--ink2);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.ctaGhost:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.photoWrapper {
+  width: 100%;
+}
+
+.photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ink2);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  overflow: hidden;
+  position: relative;
+}
+
+.photoStripes {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 8px,
+    color-mix(in oklch, var(--line) 60%, transparent) 8px,
+    color-mix(in oklch, var(--line) 60%, transparent) 9px
+  );
+}
+
+.photoLabel {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.photoInitials {
+  font-size: 2rem;
+}
+
+.photoText {
+  font-size: 0.72rem;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 120px 24px 60px;
+  }
+
+  .photoWrapper {
+    display: none;
+  }
+}

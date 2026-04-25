@@ -1,0 +1,35 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink2);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: var(--ink);
+}
+
+.label {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  min-width: 70px;
+  flex-shrink: 0;
+}
+
+.display {
+  flex: 1;
+}

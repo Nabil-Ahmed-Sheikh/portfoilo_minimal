@@ -1,0 +1,32 @@
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 32px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.copy {
+  font-size: 0.75rem;
+  color: var(--ink2);
+  letter-spacing: 0.06em;
+}
+
+.tagline {
+  font-size: 0.75rem;
+  color: var(--ink2);
+  letter-spacing: 0.06em;
+  font-style: italic;
+  font-family: var(--font-serif, Georgia, serif);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 32px 24px;
+  }
+}

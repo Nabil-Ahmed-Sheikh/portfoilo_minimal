@@ -1,0 +1,21 @@
+import { socialLinks } from '@/data/personal';
+import styles from './SocialLinks.module.css';
+
+export function SocialLinks() {
+  return (
+    <div className={styles.list}>
+      {socialLinks.map((link) => (
+        <a
+          key={link.id}
+          href={link.href}
+          className={styles.link}
+          target={link.href.startsWith('mailto:') ? undefined : '_blank'}
+          rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+        >
+          <span className={styles.label}>{link.label}</span>
+          <span className={styles.display}>{link.display}</span>
+        </a>
+      ))}
+    </div>
+  );
+}

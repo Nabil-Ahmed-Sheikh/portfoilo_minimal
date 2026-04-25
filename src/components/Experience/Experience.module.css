@@ -1,0 +1,17 @@
+.section {
+  padding: 120px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 24px;
+  }
+}

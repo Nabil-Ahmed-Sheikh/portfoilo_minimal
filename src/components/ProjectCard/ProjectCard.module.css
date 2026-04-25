@@ -1,0 +1,108 @@
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  padding: 40px;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.25s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+.card:hover {
+  background: var(--bg);
+  transform: translateY(-4px);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink2);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.imgStripes {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    color-mix(in oklch, var(--line) 50%, transparent) 10px,
+    color-mix(in oklch, var(--line) 50%, transparent) 11px
+  );
+}
+
+.imgLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.title {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.subtitle {
+  display: block;
+  font-style: italic;
+  color: var(--ink2);
+  font-size: 0.85em;
+}
+
+.desc {
+  font-size: 0.9rem;
+  color: var(--ink2);
+  line-height: 1.6;
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 24px;
+}
