@@ -43,3 +43,12 @@ export interface PersonalInfo {
   bio: string;
   email: string;
 }
+
+export interface PortfolioData {
+  personal: PersonalInfo;
+  socialLinks: SocialLink[];
+  projects: Project[];
+  experience: ExperienceEntry[];
+  stack: StackEntry[];
+  stats: Stat[];
+}

@@ -1,10 +1,14 @@
 import { FadeIn } from '@/components/FadeIn';
 import { SectionLabel } from '@/components/SectionLabel';
 import { ExperienceItem } from '@/components/ExperienceItem';
-import { experience } from '@/data/experience';
+import type { ExperienceEntry } from '@/types';
 import styles from './Experience.module.css';
 
-export function Experience() {
+interface ExperienceProps {
+  experience: ExperienceEntry[];
+}
+
+export function Experience({ experience }: ExperienceProps) {
   return (
     <section id="experience" className={styles.section}>
       <FadeIn>

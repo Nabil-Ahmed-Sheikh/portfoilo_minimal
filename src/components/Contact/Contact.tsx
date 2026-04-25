@@ -2,9 +2,14 @@ import { FadeIn } from '@/components/FadeIn';
 import { SectionLabel } from '@/components/SectionLabel';
 import { SocialLinks } from '@/components/SocialLinks';
 import { ContactForm } from '@/components/ContactForm';
+import type { SocialLink } from '@/types';
 import styles from './Contact.module.css';
 
-export function Contact() {
+interface ContactProps {
+  socialLinks: SocialLink[];
+}
+
+export function Contact({ socialLinks }: ContactProps) {
   return (
     <section id="contact" className={styles.section}>
       <FadeIn>
@@ -21,7 +26,7 @@ export function Contact() {
             Open to interesting engineering roles, freelance projects, and collaborations. Drop me a
             line and let&apos;s build something great.
           </p>
-          <SocialLinks />
+          <SocialLinks socialLinks={socialLinks} />
         </FadeIn>
         <FadeIn delay={150}>
           <ContactForm />

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { personal } from '@/data/personal';
+import type { PersonalInfo } from '@/types';
 import styles from './Nav.module.css';
 
 const navLinks = [
@@ -10,7 +10,11 @@ const navLinks = [
   { href: '#contact', label: 'Contact' },
 ];
 
-export function Nav() {
+interface NavProps {
+  personal: PersonalInfo;
+}
+
+export function Nav({ personal }: NavProps) {
   return (
     <nav className={styles.nav}>
       <Link href="/" className={styles.logo}>

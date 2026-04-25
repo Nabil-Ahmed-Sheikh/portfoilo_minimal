@@ -1,7 +1,11 @@
-import { socialLinks } from '@/data/personal';
+import type { SocialLink } from '@/types';
 import styles from './SocialLinks.module.css';
 
-export function SocialLinks() {
+interface SocialLinksProps {
+  socialLinks: SocialLink[];
+}
+
+export function SocialLinks({ socialLinks }: SocialLinksProps) {
   return (
     <div className={styles.list}>
       {socialLinks.map((link) => (

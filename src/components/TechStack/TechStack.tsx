@@ -1,10 +1,14 @@
 import { FadeIn } from '@/components/FadeIn';
 import { SectionLabel } from '@/components/SectionLabel';
 import { StackItem } from '@/components/StackItem';
-import { stack } from '@/data/stack';
+import type { StackEntry } from '@/types';
 import styles from './TechStack.module.css';
 
-export function TechStack() {
+interface TechStackProps {
+  stack: StackEntry[];
+}
+
+export function TechStack({ stack }: TechStackProps) {
   return (
     <section id="stack" className={styles.section}>
       <FadeIn>

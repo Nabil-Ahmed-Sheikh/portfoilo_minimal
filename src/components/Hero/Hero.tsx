@@ -1,8 +1,12 @@
 import { FadeIn } from '@/components/FadeIn';
-import { personal } from '@/data/personal';
+import type { PersonalInfo } from '@/types';
 import styles from './Hero.module.css';
 
-export function Hero() {
+interface HeroProps {
+  personal: PersonalInfo;
+}
+
+export function Hero({ personal }: HeroProps) {
   return (
     <div className={styles.hero}>
       <FadeIn className={styles.text}>

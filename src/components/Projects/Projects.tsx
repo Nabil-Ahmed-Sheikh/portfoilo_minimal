@@ -1,10 +1,14 @@
 import { FadeIn } from '@/components/FadeIn';
 import { SectionLabel } from '@/components/SectionLabel';
 import { ProjectCard } from '@/components/ProjectCard';
-import { projects } from '@/data/projects';
+import type { Project } from '@/types';
 import styles from './Projects.module.css';
 
-export function Projects() {
+interface ProjectsProps {
+  projects: Project[];
+}
+
+export function Projects({ projects }: ProjectsProps) {
   return (
     <section id="projects" className={styles.section}>
       <FadeIn>

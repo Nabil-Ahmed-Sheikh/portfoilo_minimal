@@ -1,8 +1,12 @@
 import { FadeIn } from '@/components/FadeIn';
-import { stats } from '@/data/stats';
+import type { Stat } from '@/types';
 import styles from './StatsBar.module.css';
 
-export function StatsBar() {
+interface StatsBarProps {
+  stats: Stat[];
+}
+
+export function StatsBar({ stats }: StatsBarProps) {
   return (
     <FadeIn>
       <div className={styles.bar}>
