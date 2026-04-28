@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import type { PersonalInfo } from '@/types';
 import styles from './Hero.module.css';
@@ -49,10 +50,13 @@ export function Hero({ personal }: HeroProps) {
       <div ref={photoRef} className={styles.photoWrapper}>
         <div className={styles.photo}>
           <div className={styles.photoStripes} />
-          <div className={styles.photoLabel}>
-            <span className={styles.photoInitials}>{personal.name.split(' ').map((n) => n[0]).join('')}</span>
-            <span className={styles.photoText}>Photo</span>
-          </div>
+          <Image
+            src="/hat.jpg"
+            alt="Profile photo"
+            fill
+            className={styles.photoImg}
+            sizes="320px"
+          />
         </div>
       </div>
     </div>
