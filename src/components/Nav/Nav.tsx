@@ -30,6 +30,9 @@ export function Nav({ personal }: NavProps) {
             </li>
           ))}
         </ul>
+        <a href="/resume.pdf" download className={styles.resumeBtn}>
+          Resume ↓
+        </a>
         <ThemeToggle />
       </div>
     </nav>

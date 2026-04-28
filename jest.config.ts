@@ -8,6 +8,8 @@ const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    '^gsap$': '<rootDir>/src/__mocks__/gsap.ts',
+    '^gsap/ScrollTrigger$': '<rootDir>/src/__mocks__/gsap/ScrollTrigger.ts',
   },
 collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts', '!src/**/index.ts'],
   coverageThreshold: {

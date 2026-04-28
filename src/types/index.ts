@@ -6,6 +6,13 @@ export interface Project {
   description: string;
   href: string;
   arrowLabel?: string;
+  // detail page fields
+  longDescription?: string;
+  tech?: string[];
+  highlights?: string[];
+  year?: string;
+  role?: string;
+  liveHref?: string;
 }
 
 export interface ExperienceEntry {

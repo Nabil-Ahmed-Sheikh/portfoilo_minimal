@@ -1,10 +1,1 @@
-.fadeIn {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.fadeIn.visible {
-  opacity: 1;
-  transform: none;
-}
+/* GSAP manages opacity and transform via inline styles */

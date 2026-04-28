@@ -1,4 +1,7 @@
-import { FadeIn } from '@/components/FadeIn';
+'use client';
+
+import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
 import type { PersonalInfo } from '@/types';
 import styles from './Hero.module.css';
 
@@ -7,16 +10,33 @@ interface HeroProps {
 }
 
 export function Hero({ personal }: HeroProps) {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const bioRef = useRef<HTMLParagraphElement>(null);
+  const ctasRef = useRef<HTMLDivElement>(null);
+  const photoRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.from(headingRef.current, { opacity: 0, y: 56, duration: 1 })
+      .from(bioRef.current, { opacity: 0, y: 24, duration: 0.7 }, '-=0.55')
+      .from(ctasRef.current, { opacity: 0, y: 16, duration: 0.6 }, '-=0.45')
+      .from(photoRef.current, { opacity: 0, x: 48, scale: 0.92, duration: 1 }, '-=0.7');
+
+    return () => { tl.kill(); };
+  }, []);
+
   return (
     <div className={styles.hero}>
-      <FadeIn className={styles.text}>
-        <h1 className={styles.heading}>
+      <div className={styles.text}>
+        <h1 ref={headingRef} className={styles.heading}>
           Software
           <br />
           <em className={styles.em}>Engineer</em>
         </h1>
-        <p className={styles.bio}>{personal.bio}</p>
-        <div className={styles.ctas}>
+        <p ref={bioRef} className={styles.bio}>{personal.bio}</p>
+        <div ref={ctasRef} className={styles.ctas}>
           <a href="#projects" className={styles.cta}>
             View Work ↓
           </a>
@@ -24,9 +44,9 @@ export function Hero({ personal }: HeroProps) {
             Get in Touch
           </a>
         </div>
-      </FadeIn>
+      </div>
 
-      <FadeIn delay={200} className={styles.photoWrapper}>
+      <div ref={photoRef} className={styles.photoWrapper}>
         <div className={styles.photo}>
           <div className={styles.photoStripes} />
           <div className={styles.photoLabel}>
@@ -34,7 +54,7 @@ export function Hero({ personal }: HeroProps) {
             <span className={styles.photoText}>Photo</span>
           </div>
         </div>
-      </FadeIn>
+      </div>
     </div>
   );
 }

@@ -3,12 +3,19 @@
   border: 1px solid var(--line);
   padding: 40px;
   cursor: pointer;
-  transition: background 0.25s, transform 0.25s;
-  text-decoration: none;
+  transition: background 0.25s;
   color: inherit;
   display: block;
   position: relative;
   overflow: hidden;
+  will-change: transform;
+}
+
+/* Full-area overlay link — sits at z-index 1 so arrow link (z-index 2) stays clickable */
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .card::before {
@@ -26,7 +33,7 @@
 
 .card:hover {
   background: var(--bg);
-  transform: translateY(-4px);
+  /* GSAP handles translateY */
 }
 
 .card:hover::before {
@@ -105,4 +112,7 @@
   text-transform: uppercase;
   color: var(--accent);
   margin-top: 24px;
+  text-decoration: none;
+  position: relative;
+  z-index: 2; /* sits above the .cardOverlay so it receives clicks */
 }

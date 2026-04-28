@@ -1,7 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import styles from './FadeIn.module.css';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -11,30 +14,37 @@ interface FadeInProps {
 
 export function FadeIn({ children, delay = 0, className }: FadeInProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(el);
-        }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    gsap.set(el, { opacity: 0, y: 24 });
+
+    const tween = gsap.to(el, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      delay: delay / 1000,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 90%',
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+    });
+
+    return () => {
+      tween.kill();
+      ScrollTrigger.getAll().forEach((t) => {
+        if (t.trigger === el) t.kill();
+      });
+    };
+  }, [delay]);
 
   return (
-    <div
-      ref={ref}
-      className={`${styles.fadeIn} ${visible ? styles.visible : ''} ${className ?? ''}`}
-      style={delay > 0 ? { transitionDelay: `${delay}ms` } : undefined}
-    >
+    <div ref={ref} className={className}>
       {children}
     </div>
   );

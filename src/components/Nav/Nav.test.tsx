@@ -50,4 +50,11 @@ describe('Nav', () => {
     render(<Nav personal={personal} />, { wrapper: Wrapper });
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
+
+  it('renders a resume download link', () => {
+    render(<Nav personal={personal} />, { wrapper: Wrapper });
+    const resumeLink = screen.getByText(/Resume/i).closest('a');
+    expect(resumeLink).toHaveAttribute('href', '/resume.pdf');
+    expect(resumeLink).toHaveAttribute('download');
+  });
 });

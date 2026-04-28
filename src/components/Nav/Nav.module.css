@@ -1,3 +1,14 @@
+@keyframes navSlideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .nav {
   position: fixed;
   top: 0;
@@ -13,6 +24,7 @@
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
   transition: background 0.3s ease, border-color 0.3s ease;
+  animation: navSlideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .logo {
@@ -41,10 +53,29 @@
   text-transform: uppercase;
   color: var(--ink2);
   transition: color 0.2s;
+  text-decoration: none;
 }
 
 .link:hover {
   color: var(--ink);
+}
+
+.resumeBtn {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  padding: 6px 14px;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.resumeBtn:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
 }
 
 @media (max-width: 768px) {
@@ -59,6 +90,10 @@
 
 @media (max-width: 480px) {
   .links {
+    display: none;
+  }
+
+  .resumeBtn {
     display: none;
   }
 }

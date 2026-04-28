@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { FadeIn } from './FadeIn';
+import gsap from 'gsap';
 
 describe('FadeIn', () => {
   it('renders its children', () => {
@@ -9,16 +10,6 @@ describe('FadeIn', () => {
       </FadeIn>
     );
     expect(screen.getByText('Hello world')).toBeInTheDocument();
-  });
-
-  it('starts without visible class', () => {
-    const { container } = render(
-      <FadeIn>
-        <span>content</span>
-      </FadeIn>
-    );
-    const wrapper = container.firstChild as HTMLElement;
-    expect(wrapper.className).not.toMatch(/visible/);
   });
 
   it('applies an optional extra className', () => {
@@ -31,22 +22,23 @@ describe('FadeIn', () => {
     expect(wrapper.className).toMatch(/extra/);
   });
 
-  it('applies transition-delay style when delay is provided', () => {
-    const { container } = render(
-      <FadeIn delay={200}>
-        <span>content</span>
-      </FadeIn>
-    );
-    const wrapper = container.firstChild as HTMLElement;
-    expect(wrapper.style.transitionDelay).toBe('200ms');
-  });
-
-  it('calls IntersectionObserver observe on mount', () => {
+  it('triggers a gsap animation on mount', () => {
     render(
       <FadeIn>
         <span>content</span>
       </FadeIn>
     );
-    expect(global.IntersectionObserver).toHaveBeenCalled();
+    expect((gsap as unknown as { to: jest.Mock }).to).toHaveBeenCalled();
+  });
+
+  it('passes delay to gsap as seconds', () => {
+    render(
+      <FadeIn delay={400}>
+        <span>content</span>
+      </FadeIn>
+    );
+    const toMock = (gsap as unknown as { to: jest.Mock }).to;
+    const callArgs = toMock.mock.calls[toMock.mock.calls.length - 1];
+    expect(callArgs[1]).toMatchObject({ delay: 0.4 });
   });
 });
