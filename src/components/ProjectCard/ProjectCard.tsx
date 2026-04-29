@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
 import type { Project } from '@/types';
@@ -31,8 +32,20 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <Link href={`/projects/${project.id}`} className={styles.cardOverlay} aria-label={`View ${project.title} details`} />
 
       <div className={styles.img}>
-        <div className={styles.imgStripes} />
-        <span className={styles.imgLabel}>Project Screenshot</span>
+        {project.coverImage ? (
+          <Image
+            src={project.coverImage}
+            alt={`${project.title} screenshot`}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{ objectFit: 'cover' }}
+          />
+        ) : (
+          <>
+            <div className={styles.imgStripes} />
+            <span className={styles.imgLabel}>Project Screenshot</span>
+          </>
+        )}
       </div>
       <p className={styles.tag}>{project.tag}</p>
       <h3 className={styles.title}>

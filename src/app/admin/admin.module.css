@@ -1,0 +1,109 @@
+.shell {
+  display: flex;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  background: #f5f5f5;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: #1a1a1a;
+  color: #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebarBrand {
+  padding: 0 20px 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  border-bottom: 1px solid #333;
+  margin-bottom: 8px;
+}
+
+.sidebarBrand span {
+  opacity: 0.5;
+  font-weight: 400;
+  font-size: 0.75rem;
+  display: block;
+  margin-top: 2px;
+}
+
+.nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 12px;
+}
+
+.navLink {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #aaa;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.navLink:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.navLinkActive {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.sidebarFooter {
+  padding: 16px 12px 0;
+  border-top: 1px solid #333;
+  margin-top: 16px;
+}
+
+.logoutBtn {
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #aaa;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.logoutBtn:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.main {
+  flex: 1;
+  padding: 32px 40px;
+  max-width: 960px;
+}
+
+.pageTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 24px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 16px;
+}

@@ -13,6 +13,10 @@ export interface Project {
   year?: string;
   role?: string;
   liveHref?: string;
+  // media
+  coverImage?: string;
+  images?: string[];
+  videoUrl?: string;
 }
 
 export interface ExperienceEntry {
@@ -58,4 +62,10 @@ export interface PortfolioData {
   experience: ExperienceEntry[];
   stack: StackEntry[];
   stats: Stat[];
+}
+
+export interface PortfolioOverride extends Partial<PortfolioData> {
+  deletedProjectIds?: string[];
+  deletedExperienceIds?: string[];
+  deletedStackIds?: string[];
 }

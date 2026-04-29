@@ -55,6 +55,7 @@
   text-transform: uppercase;
   position: relative;
   overflow: hidden;
+  /* position: relative is required for next/image fill */
 }
 
 .imgStripes {

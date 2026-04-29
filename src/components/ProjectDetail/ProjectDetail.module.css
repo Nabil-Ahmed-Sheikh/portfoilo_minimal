@@ -162,6 +162,31 @@
   color: var(--ink);
 }
 
+.mediaGallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 8px;
+  margin-bottom: 48px;
+}
+
+.mediaItem {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+}
+
+.videoEmbed {
+  margin-bottom: 48px;
+}
+
+.videoEmbed iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: 1px solid var(--line);
+}
+
 @media (max-width: 768px) {
   .page {
     padding: 100px 24px 80px;
@@ -169,5 +194,9 @@
 
   .back {
     margin-bottom: 48px;
+  }
+
+  .mediaGallery {
+    grid-template-columns: 1fr;
   }
 }

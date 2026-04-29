@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# admin portal — live data, not source
+src/data/portfolio-override.json
+/public/uploads/*
+!/public/uploads/.gitkeep

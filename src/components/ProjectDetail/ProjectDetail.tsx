@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
 import type { Project } from '@/types';
@@ -48,6 +49,33 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       )}
 
       <div className={styles.divider} />
+
+      {/* Media gallery */}
+      {(project.coverImage || (project.images && project.images.length > 0)) && (
+        <div data-anim="body" className={styles.mediaGallery}>
+          {[project.coverImage, ...(project.images ?? [])].filter(Boolean).map((src, i) => (
+            <div key={i} className={styles.mediaItem}>
+              <Image
+                src={src!}
+                alt={`${project.title} screenshot ${i + 1}`}
+                fill
+                sizes="800px"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {project.videoUrl && (
+        <div data-anim="body" className={styles.videoEmbed}>
+          <iframe
+            src={project.videoUrl}
+            allowFullScreen
+            title={`${project.title} demo video`}
+          />
+        </div>
+      )}
 
       {project.longDescription && (
         <p data-anim="body" className={styles.longDesc}>{project.longDescription}</p>
