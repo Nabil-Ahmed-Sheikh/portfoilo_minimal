@@ -27,8 +27,8 @@ describe('Hero', () => {
     expect(link.closest('a')).toHaveAttribute('href', '#contact');
   });
 
-  it('renders the photo placeholder with initials', () => {
+  it('renders the profile photo', () => {
     render(<Hero personal={personal} />);
-    expect(screen.getByText('NA')).toBeInTheDocument();
+    expect(screen.getByAltText('Profile photo')).toBeInTheDocument();
   });
 });

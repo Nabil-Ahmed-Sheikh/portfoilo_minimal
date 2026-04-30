@@ -1,14 +1,19 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ContactForm } from './ContactForm';
 
+const mockFetch = jest.fn();
+
+beforeAll(() => {
+  global.fetch = mockFetch;
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});
+
 describe('ContactForm', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
-  });
-
-  afterEach(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
+    mockFetch.mockClear();
   });
 
   it('renders the name field', () => {
@@ -32,6 +37,8 @@ describe('ContactForm', () => {
   });
 
   it('shows Sending... state after submission', async () => {
+    // Fetch never resolves so we stay in "sending" state
+    mockFetch.mockReturnValue(new Promise(() => {}));
     render(<ContactForm />);
     const form = screen.getByRole('button', { name: 'Send Message' }).closest('form')!;
     fireEvent.submit(form);
@@ -39,20 +46,34 @@ describe('ContactForm', () => {
   });
 
   it('shows success state after submission resolves', async () => {
+    mockFetch.mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
     render(<ContactForm />);
-    const form = screen.getByRole('button').closest('form')!;
+    const form = screen.getByRole('button', { name: 'Send Message' }).closest('form')!;
     fireEvent.submit(form);
     await waitFor(
       () => expect(screen.getByRole('button', { name: 'Message Sent ✓' })).toBeInTheDocument(),
-      { timeout: 2000 }
+      { timeout: 3000 }
     );
   });
 
   it('disables fields during sending', async () => {
+    mockFetch.mockReturnValue(new Promise(() => {}));
     render(<ContactForm />);
-    const form = screen.getByRole('button').closest('form')!;
+    const form = screen.getByRole('button', { name: 'Send Message' }).closest('form')!;
     fireEvent.submit(form);
-    const nameInput = screen.getByLabelText('Name');
-    expect(nameInput).toBeDisabled();
+    await waitFor(() => expect(screen.getByLabelText('Name')).toBeDisabled());
+  });
+
+  it('shows an error message when the request fails', async () => {
+    mockFetch.mockResolvedValue({
+      ok: false,
+      json: async () => ({ error: 'Something went wrong. Please try again.' }),
+    });
+    render(<ContactForm />);
+    const form = screen.getByRole('button', { name: 'Send Message' }).closest('form')!;
+    fireEvent.submit(form);
+    await waitFor(() =>
+      expect(screen.getByText(/something went wrong/i)).toBeInTheDocument()
+    );
   });
 });

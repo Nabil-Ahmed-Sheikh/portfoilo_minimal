@@ -20,13 +20,30 @@ const dmSerifDisplay = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Nabil Ahmed — Software Engineer',
-  description: 'Building fast, scalable web apps. React, TypeScript, Node.js, AWS, Python.',
-  openGraph: {
-    title: 'Nabil Ahmed — Software Engineer',
-    description: 'Building fast, scalable web apps.',
-    type: 'website',
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nabilahmed.dev',
+  ),
+  title: {
+    default: 'Nabil Ahmed — Software Engineer',
+    template: '%s | Nabil Ahmed',
   },
+  description:
+    'Building fast, scalable web apps. React, TypeScript, Node.js, AWS, Python.',
+  keywords: ['software engineer', 'full-stack', 'React', 'TypeScript', 'Node.js', 'AWS'],
+  authors: [{ name: 'Nabil Ahmed', url: 'https://github.com/Nabil-Ahmed-Sheikh' }],
+  openGraph: {
+    siteName: 'Nabil Ahmed',
+    title: 'Nabil Ahmed — Software Engineer',
+    description: 'Building fast, scalable web apps. React, TypeScript, Node.js, AWS, Python.',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nabil Ahmed — Software Engineer',
+    description: 'Building fast, scalable web apps. React, TypeScript, Node.js, AWS, Python.',
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

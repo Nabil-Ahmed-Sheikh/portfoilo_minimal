@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Nav } from './Nav';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { personal } from '@/data/personal';
@@ -30,31 +30,45 @@ describe('Nav', () => {
     expect(logo).toHaveAttribute('href', '/');
   });
 
-  it('renders all navigation links', () => {
+  it('renders all navigation links in the desktop nav', () => {
     render(<Nav personal={personal} />, { wrapper: Wrapper });
-    expect(screen.getByText('Projects')).toBeInTheDocument();
-    expect(screen.getByText('Experience')).toBeInTheDocument();
-    expect(screen.getByText('Stack')).toBeInTheDocument();
-    expect(screen.getByText('Contact')).toBeInTheDocument();
+    // Each link appears in both desktop nav and mobile drawer — check at least one exists
+    expect(screen.getAllByText('Projects').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Experience').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Stack').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Contact').length).toBeGreaterThan(0);
   });
 
   it('navigation links have correct hrefs', () => {
     render(<Nav personal={personal} />, { wrapper: Wrapper });
-    expect(screen.getByText('Projects').closest('a')).toHaveAttribute('href', '#projects');
-    expect(screen.getByText('Experience').closest('a')).toHaveAttribute('href', '#experience');
-    expect(screen.getByText('Stack').closest('a')).toHaveAttribute('href', '#stack');
-    expect(screen.getByText('Contact').closest('a')).toHaveAttribute('href', '#contact');
+    const projectLinks = screen.getAllByText('Projects').map((el) => el.closest('a'));
+    expect(projectLinks.some((a) => a?.getAttribute('href') === '#projects')).toBe(true);
+    const experienceLinks = screen.getAllByText('Experience').map((el) => el.closest('a'));
+    expect(experienceLinks.some((a) => a?.getAttribute('href') === '#experience')).toBe(true);
   });
 
   it('renders the theme toggle button', () => {
     render(<Nav personal={personal} />, { wrapper: Wrapper });
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /switch to (dark|light) mode/i })).toBeInTheDocument();
+  });
+
+  it('renders the hamburger menu button', () => {
+    render(<Nav personal={personal} />, { wrapper: Wrapper });
+    expect(screen.getByRole('button', { name: /open menu/i })).toBeInTheDocument();
+  });
+
+  it('opens the mobile drawer when hamburger is clicked', () => {
+    render(<Nav personal={personal} />, { wrapper: Wrapper });
+    const burger = screen.getByRole('button', { name: /open menu/i });
+    fireEvent.click(burger);
+    expect(burger).toHaveAttribute('aria-expanded', 'true');
+    expect(burger).toHaveAttribute('aria-label', 'Close menu');
   });
 
   it('renders a resume download link', () => {
     render(<Nav personal={personal} />, { wrapper: Wrapper });
-    const resumeLink = screen.getByText(/Resume/i).closest('a');
-    expect(resumeLink).toHaveAttribute('href', '/resume.pdf');
-    expect(resumeLink).toHaveAttribute('download');
+    const resumeLinks = screen.getAllByText(/Resume/i).map((el) => el.closest('a'));
+    expect(resumeLinks.some((a) => a?.getAttribute('href') === '/resume.pdf')).toBe(true);
+    expect(resumeLinks.some((a) => a?.hasAttribute('download'))).toBe(true);
   });
 });

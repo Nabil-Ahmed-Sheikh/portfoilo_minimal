@@ -78,6 +78,115 @@
   color: var(--bg);
 }
 
+/* ─── Hamburger ─── */
+
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.burgerLine {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+.burgerLineOpen1 {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.burgerLineOpen2 {
+  opacity: 0;
+}
+
+.burgerLineOpen3 {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ─── Mobile drawer ─── */
+
+.drawer {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding: 0 24px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.3s ease;
+}
+
+.drawerOpen {
+  max-height: 360px;
+  padding: 20px 24px 28px;
+}
+
+.drawerLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.drawerLink {
+  display: block;
+  padding: 14px 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s;
+}
+
+.drawerLink:hover {
+  color: var(--ink);
+}
+
+.drawerResume {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  padding: 10px 20px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.drawerResume:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  top: 64px;
+  z-index: 98;
+  background: oklch(0% 0 0 / 30%);
+}
+
+/* ─── Responsive ─── */
+
 @media (max-width: 768px) {
   .nav {
     padding: 0 24px;
@@ -95,5 +204,9 @@
 
   .resumeBtn {
     display: none;
+  }
+
+  .burger {
+    display: flex;
   }
 }
