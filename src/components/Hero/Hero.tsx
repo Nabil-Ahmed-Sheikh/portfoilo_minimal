@@ -19,13 +19,15 @@ export function Hero({ personal }: HeroProps) {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    tl.from(headingRef.current, { opacity: 0, y: 56, duration: 1 })
-      .from(bioRef.current, { opacity: 0, y: 24, duration: 0.7 }, '-=0.55')
-      .from(ctasRef.current, { opacity: 0, y: 16, duration: 0.6 }, '-=0.45')
-      .from(photoRef.current, { opacity: 0, x: 48, scale: 0.92, duration: 1 }, '-=0.7');
+    const ctx = gsap.context(() => {
+      gsap.timeline({ defaults: { ease: 'power3.out' } })
+        .from(headingRef.current, { opacity: 0, y: 56, duration: 1 })
+        .from(bioRef.current, { opacity: 0, y: 24, duration: 0.7 }, '-=0.55')
+        .from(ctasRef.current, { opacity: 0, y: 16, duration: 0.6 }, '-=0.45')
+        .from(photoRef.current, { opacity: 0, x: 48, scale: 0.92, duration: 1 }, '-=0.7');
+    });
 
-    return () => { tl.kill(); };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -54,6 +56,8 @@ export function Hero({ personal }: HeroProps) {
             src="/hat.jpg"
             alt="Profile photo"
             fill
+            loading="eager"
+            priority
             className={styles.photoImg}
             sizes="320px"
           />

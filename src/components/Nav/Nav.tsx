@@ -7,10 +7,10 @@ import type { PersonalInfo } from '@/types';
 import styles from './Nav.module.css';
 
 const navLinks = [
-  { href: '#projects', label: 'Projects' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#stack', label: 'Stack' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#projects', label: 'Projects' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/#stack', label: 'Stack' },
+  { href: '/#contact', label: 'Contact' },
 ];
 
 interface NavProps {
@@ -30,9 +30,9 @@ export function Nav({ personal }: NavProps) {
           <ul className={styles.links}>
             {navLinks.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className={styles.link}>
+                <Link href={link.href} className={styles.link}>
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -61,13 +61,13 @@ export function Nav({ personal }: NavProps) {
         <ul className={styles.drawerLinks}>
           {navLinks.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 className={styles.drawerLink}
                 onClick={() => setOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
