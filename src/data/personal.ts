@@ -2,9 +2,9 @@ import type { PersonalInfo, SocialLink } from '@/types';
 
 export const personal: PersonalInfo = {
   name: 'Nabil Ahmed',
-  tagline: 'Building fast, scalable web apps',
-  bio: 'Building fast, scalable web apps. I turn complex problems into elegant, reliable systems — from frontend to cloud infrastructure.',
-  email: 'nabilahmed.cloud@gmail.com',
+  tagline: 'Full-Stack & Cloud Engineer',
+  bio: 'Full-stack and cloud engineer with 5+ years shipping production systems — from HIPAA-compliant telemedicine to open-source data infrastructure and AWS cloud architecture. I turn complex problems into reliable, well-tested solutions.',
+  email: 'nabil.ahmednsu@gmail.com',
 };
 
 export const socialLinks: SocialLink[] = [
@@ -23,7 +23,7 @@ export const socialLinks: SocialLink[] = [
   {
     id: 'email',
     label: 'Email',
-    display: 'nabilahmed.cloud@gmail.com',
-    href: 'mailto:nabilahmed.cloud@gmail.com',
+    display: 'nabil.ahmednsu@gmail.com',
+    href: 'mailto:nabil.ahmednsu@gmail.com',
   },
 ];
