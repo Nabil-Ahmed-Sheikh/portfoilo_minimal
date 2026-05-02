@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './admin.module.css';
 import AdminLogoutButton from './AdminLogoutButton';
 
@@ -11,6 +14,12 @@ const NAV_LINKS = [
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
+  if (pathname === '/admin/login') {
+    return <>{children}</>;
+  }
+
   return (
     <div className={styles.shell}>
       <aside className={styles.sidebar}>
