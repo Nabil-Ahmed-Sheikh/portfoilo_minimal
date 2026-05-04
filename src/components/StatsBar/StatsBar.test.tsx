@@ -1,13 +1,19 @@
 import { render, screen } from '@testing-library/react';
 import { StatsBar } from './StatsBar';
-import { stats } from '@/data/stats';
+import type { Stat } from '@/types';
+
+const stats: Stat[] = [
+  { id: 'years', value: '5', prefix: '+', label: 'Years of\nExperience' },
+  { id: 'projects', value: '10', prefix: '+', label: 'Projects\nCompleted' },
+  { id: 'companies', value: '4', label: 'Companies\nWorked At' },
+];
 
 describe('StatsBar', () => {
-  it('renders all three stats', () => {
+  it('renders all stat values', () => {
     render(<StatsBar stats={stats} />);
-    expect(screen.getByText('3')).toBeInTheDocument();
+    expect(screen.getByText('5')).toBeInTheDocument();
     expect(screen.getByText('10')).toBeInTheDocument();
-    expect(screen.getByText('2')).toBeInTheDocument();
+    expect(screen.getByText('4')).toBeInTheDocument();
   });
 
   it('renders stat prefix symbols', () => {

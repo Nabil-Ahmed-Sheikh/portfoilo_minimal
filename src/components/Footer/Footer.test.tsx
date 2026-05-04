@@ -1,11 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import { Footer } from './Footer';
-import { personal } from '@/data/personal';
+import type { PersonalInfo } from '@/types';
+
+const personal: PersonalInfo = {
+  name: 'Test User',
+  tagline: 'Full-Stack & Cloud Engineer',
+  bio: 'Test bio.',
+  email: 'test@example.com',
+};
 
 describe('Footer', () => {
   it('renders the copyright notice with the author name', () => {
     render(<Footer personal={personal} />);
-    expect(screen.getByText(/Nabil Ahmed/)).toBeInTheDocument();
+    expect(screen.getByText(/Test User/)).toBeInTheDocument();
   });
 
   it('renders the current year in the copyright', () => {
@@ -16,6 +23,6 @@ describe('Footer', () => {
 
   it('renders the tagline', () => {
     render(<Footer personal={personal} />);
-    expect(screen.getByText(/Building fast, scalable web apps/)).toBeInTheDocument();
+    expect(screen.getByText(/Full-Stack & Cloud Engineer/)).toBeInTheDocument();
   });
 });

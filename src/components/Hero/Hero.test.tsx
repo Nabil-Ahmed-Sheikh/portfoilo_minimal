@@ -1,6 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { Hero } from './Hero';
-import { personal } from '@/data/personal';
+import type { PersonalInfo } from '@/types';
+
+const personal: PersonalInfo = {
+  name: 'Test User',
+  tagline: 'Test Tagline',
+  bio: 'This is a test bio for the hero section.',
+  email: 'test@example.com',
+};
 
 describe('Hero', () => {
   it('renders the main heading', () => {
@@ -11,7 +18,7 @@ describe('Hero', () => {
 
   it('renders the bio text', () => {
     render(<Hero personal={personal} />);
-    expect(screen.getByText(/Building fast, scalable web apps/)).toBeInTheDocument();
+    expect(screen.getByText(/This is a test bio/)).toBeInTheDocument();
   });
 
   it('renders the View Work CTA with correct href', () => {
