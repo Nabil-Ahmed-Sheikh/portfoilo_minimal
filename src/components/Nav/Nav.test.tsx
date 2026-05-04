@@ -42,9 +42,9 @@ describe('Nav', () => {
   it('navigation links have correct hrefs', () => {
     render(<Nav personal={personal} />, { wrapper: Wrapper });
     const projectLinks = screen.getAllByText('Projects').map((el) => el.closest('a'));
-    expect(projectLinks.some((a) => a?.getAttribute('href') === '#projects')).toBe(true);
+    expect(projectLinks.some((a) => a?.getAttribute('href') === '/#projects')).toBe(true);
     const experienceLinks = screen.getAllByText('Experience').map((el) => el.closest('a'));
-    expect(experienceLinks.some((a) => a?.getAttribute('href') === '#experience')).toBe(true);
+    expect(experienceLinks.some((a) => a?.getAttribute('href') === '/#experience')).toBe(true);
   });
 
   it('renders the theme toggle button', () => {
