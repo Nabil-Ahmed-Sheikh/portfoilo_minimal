@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nabil Ahmed — Portfolio
 
-## Getting Started
+Personal portfolio and CMS for [Nabil Ahmed](https://github.com/Nabil-Ahmed-Sheikh), Full-Stack & Cloud Engineer.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router) · **React 19** · **TypeScript**
+- **CSS Modules** with CSS custom properties for theming (light / dark)
+- **GSAP** for scroll and entrance animations
+- **Jest** + **React Testing Library**
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # fill in required vars (see below)
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Description |
+|---|---|
+| `ADMIN_PASSWORD_HASH` | Bcrypt hash of the admin password |
+| `JWT_SECRET` | Secret used to sign session tokens |
+| `RESEND_API_KEY` | Resend API key for the contact form |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL (e.g. `https://nabilahmed.dev`) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Commands
 
-## Learn More
+```bash
+npm run dev           # dev server
+npm run build         # production build
+npm run lint          # ESLint
+npm run lint:fix      # ESLint with auto-fix
+npm run format        # Prettier write
+npm run format:check  # Prettier check
+npm run test          # Jest (all tests)
+npm run test:watch    # Jest watch mode
+npm run test:coverage # Jest with coverage
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/
+│   ├── page.tsx              # Homepage
+│   ├── layout.tsx            # Root layout (fonts, theme, cursor)
+│   ├── admin/                # Admin CMS (auth-gated)
+│   └── api/                  # Route handlers (contact, admin CRUD)
+├── components/               # UI components (co-located CSS + tests)
+├── contexts/                 # ThemeContext
+├── data/                     # Portfolio content (projects, experience, stack…)
+├── lib/                      # Auth helpers, data fetching
+└── types/                    # Shared TypeScript types
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Content
 
-## Deploy on Vercel
+All portfolio content lives in `src/data/`. Edit the files there — no component changes needed:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| File | What it controls |
+|---|---|
+| `personal.ts` | Name, bio, tagline, social links |
+| `projects.ts` | Project cards and detail pages |
+| `experience.ts` | Work history |
+| `stack.ts` | Tech stack items |
+| `stats.ts` | Hero stats bar |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Admin portal
+
+A password-protected CMS is available at `/admin/login`. It lets you manage projects, experience, and tech stack entries without touching the codebase. Auth is handled via JWT cookies; the middleware at `src/middleware.ts` guards all `/admin/*` routes.
+
+## Theming
+
+Colors are CSS custom properties (`--bg`, `--ink`, `--accent`, etc.) defined in `src/app/globals.css`. `ThemeContext` persists the chosen theme to `localStorage` and sets `data-theme` on `<html>`. To add a theme, add an entry in `src/styles/themes.ts` and a matching `[data-theme='name']` block in `globals.css`.
