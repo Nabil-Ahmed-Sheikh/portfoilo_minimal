@@ -1,10 +1,13 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import type { PersonalInfo } from '@/types';
 import styles from './Hero.module.css';
+
+const ROLES = ['Engineer', 'Developer', 'Builder', 'Creator'];
+const INTERVAL_MS = 2400;
 
 interface HeroProps {
   personal: PersonalInfo;
@@ -15,6 +18,8 @@ export function Hero({ personal }: HeroProps) {
   const bioRef = useRef<HTMLParagraphElement>(null);
   const ctasRef = useRef<HTMLDivElement>(null);
   const photoRef = useRef<HTMLDivElement>(null);
+  const emRef = useRef<HTMLElement>(null);
+  const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -30,13 +35,39 @@ export function Hero({ personal }: HeroProps) {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const id = setInterval(() => {
+      const em = emRef.current;
+      if (!em) return;
+
+      gsap.to(em, {
+        opacity: 0,
+        y: -14,
+        duration: 0.28,
+        ease: 'power2.in',
+        onComplete: () => {
+          setRoleIndex(i => (i + 1) % ROLES.length);
+          gsap.fromTo(
+            em,
+            { opacity: 0, y: 14 },
+            { opacity: 1, y: 0, duration: 0.38, ease: 'power2.out' },
+          );
+        },
+      });
+    }, INTERVAL_MS);
+
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <div className={styles.hero}>
       <div className={styles.text}>
         <h1 ref={headingRef} className={styles.heading}>
           Software
           <br />
-          <em className={styles.em}>Engineer</em>
+          <em ref={emRef} className={styles.em}>{ROLES[roleIndex]}</em>
         </h1>
         <p ref={bioRef} className={styles.bio}>{personal.bio}</p>
         <div ref={ctasRef} className={styles.ctas}>
