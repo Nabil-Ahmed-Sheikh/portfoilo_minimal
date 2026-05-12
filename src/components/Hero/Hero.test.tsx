@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import { Hero } from './Hero';
 import type { PersonalInfo } from '@/types';
 
@@ -10,10 +10,29 @@ const personal: PersonalInfo = {
 };
 
 describe('Hero', () => {
-  it('renders the main heading', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  it('renders the main heading with the first role', () => {
     render(<Hero personal={personal} />);
     expect(screen.getByText('Software')).toBeInTheDocument();
     expect(screen.getByText('Engineer')).toBeInTheDocument();
+  });
+
+  it('cycles to the next role after the interval', () => {
+    render(<Hero personal={personal} />);
+    expect(screen.getByText('Engineer')).toBeInTheDocument();
+
+    act(() => {
+      jest.advanceTimersByTime(2400);
+    });
+
+    expect(screen.getByText('Developer')).toBeInTheDocument();
   });
 
   it('renders the bio text', () => {

@@ -7,7 +7,11 @@ const mockTimeline = {
 
 const gsap = {
   from: jest.fn(() => mockTween),
-  to: jest.fn(() => mockTween),
+  to: jest.fn((_target: unknown, vars: { onComplete?: () => void } = {}) => {
+    vars?.onComplete?.();
+    return mockTween;
+  }),
+  fromTo: jest.fn(() => mockTween),
   set: jest.fn(),
   timeline: jest.fn(() => mockTimeline),
   registerPlugin: jest.fn(),
