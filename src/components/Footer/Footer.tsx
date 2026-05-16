@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { PersonalInfo } from '@/types';
 import styles from './Footer.module.css';
 
@@ -11,6 +12,7 @@ export function Footer({ personal }: FooterProps) {
   return (
     <footer className={styles.footer}>
       <p className={styles.copy}>© {year} {personal.name}</p>
+      <Link href="/play" className={styles.gameLink}>Play games →</Link>
       <p className={styles.tagline}>{personal.tagline}.</p>
     </footer>
   );
