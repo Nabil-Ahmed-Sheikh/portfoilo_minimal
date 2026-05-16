@@ -1,0 +1,246 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 24px 64px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.back {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.back:hover {
+  color: var(--ink);
+}
+
+.title {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  margin-top: 8px;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--ink2);
+}
+
+/* ── Stats ── */
+
+.game {
+  width: 100%;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 24px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 16px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+}
+
+.statVal {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ink);
+  transition: color 0.3s;
+}
+
+.urgent {
+  color: oklch(55% 0.18 25);
+}
+
+.statLabel {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+
+/* ── Word display ── */
+
+.wordArea {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  padding: 24px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  min-height: 100px;
+  max-height: 120px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  cursor: text;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+  line-height: 1.8;
+  align-content: flex-start;
+}
+
+.wordCurrent {
+  position: relative;
+  color: var(--ink);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+.wordPending {
+  color: var(--ink2);
+}
+
+.charCorrect {
+  color: var(--accent);
+}
+
+.charWrong {
+  color: oklch(55% 0.18 25);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.charPending {
+  color: var(--ink);
+}
+
+.charOverflow {
+  color: oklch(55% 0.18 25);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--accent);
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+/* ── Input ── */
+
+.input {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 12px;
+}
+
+.input:focus {
+  border-color: var(--accent);
+}
+
+.inputError {
+  border-color: oklch(55% 0.18 25);
+}
+
+/* ── Buttons ── */
+
+.startBtn,
+.restartBtn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.startBtn:hover,
+.restartBtn:hover {
+  background: var(--accent);
+}
+
+/* ── Results ── */
+
+.results {
+  margin-top: 4px;
+}
+
+.resultGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.resultCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 24px 12px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+}
+
+.resultVal {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.resultLabel {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+
+@media (max-width: 480px) {
+  .resultGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .statsRow .statVal {
+    font-size: 1.8rem;
+  }
+}
