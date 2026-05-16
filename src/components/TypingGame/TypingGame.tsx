@@ -99,7 +99,7 @@ export function TypingGame() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <Link href="/" className={styles.back}>← Portfolio</Link>
+        <Link href="/play" className={styles.back}>← Games</Link>
         <h1 className={styles.title}>Type the Stack</h1>
         <p className={styles.subtitle}>How fast can you type through the tech stack?</p>
       </header>
