@@ -62,8 +62,8 @@ describe('TypingGame', () => {
     expect(screen.getByRole('button', { name: /start/i })).toBeInTheDocument();
   });
 
-  it('renders the back link to portfolio', () => {
+  it('renders the back link to games hub', () => {
     render(<TypingGame />);
-    expect(screen.getByRole('link', { name: /portfolio/i })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: /games/i })).toHaveAttribute('href', '/play');
   });
 });
