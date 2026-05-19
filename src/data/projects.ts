@@ -9,6 +9,11 @@ export const projects: Project[] = [
       'An open-source CLI tool that streamlines the creation of modern data pipelines, integrating popular tools for ingestion, transformation, storage, and visualization.',
     href: 'https://github.com/Nabil-Ahmed-Sheikh',
     arrowLabel: 'GitHub →',
+    coverImage: 'https://picsum.photos/seed/sidetrek/800/450',
+    images: [
+      'https://picsum.photos/seed/sidetrek-pipeline/800/450',
+      'https://picsum.photos/seed/sidetrek-infra/800/450',
+    ],
     longDescription:
       'Sidetrek is an open-source command-line interface (CLI) tool designed to streamline the creation of modern data pipelines. It integrates several popular open-source tools to facilitate data ingestion, transformation, storage, querying, and visualization at scale. Built across two engineering roles, contributing from core feature development to cloud infrastructure.',
     tech: ['Node.js', 'Express.js', 'Go', 'React', 'AWS EKS', 'Docker', 'Kubernetes', 'Airflow', 'MLflow', 'Terraform'],
@@ -31,6 +36,11 @@ export const projects: Project[] = [
       'HIPAA-compliant telemedicine platform connecting 2000+ patients with doctors nationwide through secure video, audio, and chat.',
     href: 'https://github.com/Nabil-Ahmed-Sheikh',
     arrowLabel: 'GitHub →',
+    coverImage: 'https://picsum.photos/seed/myhealth-cover/800/450',
+    images: [
+      'https://picsum.photos/seed/myhealth-dashboard/800/450',
+      'https://picsum.photos/seed/myhealth-mobile/800/450',
+    ],
     longDescription:
       'iHealthScreen Telemedicine connects patients and doctors remotely through secure video, audio, or chat. It offers easy appointment booking, digital prescriptions, and timely care from the comfort of home — serving over 2000 patients daily nationwide. Built to strict HIPAA compliance standards.',
     tech: ['Node.js', 'Express.js', 'Socket.io', 'MongoDB', 'React Native', 'AWS EC2', 'PM2'],
@@ -53,6 +63,11 @@ export const projects: Project[] = [
       'Forecasts electricity generation and demand, then optimizes power flow to minimize total system production cost while respecting transmission constraints.',
     href: 'https://github.com/Nabil-Ahmed-Sheikh',
     arrowLabel: 'GitHub →',
+    coverImage: 'https://picsum.photos/seed/power-grid/800/450',
+    images: [
+      'https://picsum.photos/seed/power-forecast/800/450',
+      'https://picsum.photos/seed/power-ml/800/450',
+    ],
     longDescription:
       'A comprehensive tool that forecasts electricity generation and demand and optimizes power flow to minimize total system production cost while respecting transmission system constraints. Combines machine learning forecasts with Security Constrained Optimal Power Flow (SCOPF) optimization using Gurobi and a PyQt-based Single Line Diagram (SLD) interface.',
     tech: ['Python', 'Scikit-learn', 'XGBoost', 'Random Forest', 'Neural Networks', 'Gurobi', 'MySQL', 'Tkinter'],
