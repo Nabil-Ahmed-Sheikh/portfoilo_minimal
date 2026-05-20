@@ -1,0 +1,102 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" width="800" height="450">
+  <defs>
+    <linearGradient id="st-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#161b22"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#st-bg)"/>
+
+  <!-- Subtle grid -->
+  <line x1="0" y1="100" x2="800" y2="100" stroke="#21262d" stroke-width="1"/>
+  <line x1="0" y1="200" x2="800" y2="200" stroke="#21262d" stroke-width="1"/>
+  <line x1="0" y1="300" x2="800" y2="300" stroke="#21262d" stroke-width="1"/>
+  <line x1="0" y1="400" x2="800" y2="400" stroke="#21262d" stroke-width="1"/>
+  <line x1="200" y1="0" x2="200" y2="450" stroke="#21262d" stroke-width="1"/>
+  <line x1="400" y1="0" x2="400" y2="450" stroke="#21262d" stroke-width="1"/>
+  <line x1="600" y1="0" x2="600" y2="450" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Window chrome -->
+  <rect width="800" height="38" fill="#161b22"/>
+  <rect width="800" height="1" y="38" fill="#30363d"/>
+  <circle cx="22" cy="19" r="6" fill="#ff5f57"/>
+  <circle cx="44" cy="19" r="6" fill="#febc2e"/>
+  <circle cx="66" cy="19" r="6" fill="#28c840"/>
+  <text x="400" y="23" text-anchor="middle" fill="#6e7681" font-size="11" font-family="ui-monospace,monospace">sidetrek — bash — 160×48</text>
+
+  <!-- Terminal prompt line -->
+  <text x="24" y="70" fill="#6e7681" font-size="12" font-family="ui-monospace,monospace">~/project</text>
+  <text x="24" y="92" font-size="12" font-family="ui-monospace,monospace">
+    <tspan fill="#6e7681">$ </tspan><tspan fill="#79c0ff">sidetrek</tspan><tspan fill="#e6edf3"> pipeline </tspan><tspan fill="#3fb950">--create</tspan><tspan fill="#e6edf3"> full-stack</tspan>
+  </text>
+  <text x="24" y="112" fill="#3fb950" font-size="12" font-family="ui-monospace,monospace">✓  Configuring Airflow + MLflow…</text>
+  <text x="24" y="130" fill="#3fb950" font-size="12" font-family="ui-monospace,monospace">✓  Provisioning AWS EKS via Terraform…</text>
+  <text x="24" y="148" fill="#79c0ff" font-size="12" font-family="ui-monospace,monospace">→  Pipeline live at https://app.sidetrek.com</text>
+
+  <!-- Pipeline diagram header -->
+  <text x="24" y="184" fill="#6e7681" font-size="10" font-family="ui-monospace,monospace" letter-spacing="2">PIPELINE STAGES</text>
+
+  <!-- Stage 1: Ingest -->
+  <rect x="24" y="196" width="148" height="68" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect x="24" y="196" width="148" height="3" rx="2" fill="#3fb950"/>
+  <text x="98" y="223" text-anchor="middle" fill="#e6edf3" font-size="13" font-family="ui-monospace,monospace" font-weight="700">INGEST</text>
+  <text x="98" y="245" text-anchor="middle" fill="#6e7681" font-size="10" font-family="ui-monospace,monospace">Kafka · REST · S3</text>
+
+  <!-- Arrow -->
+  <line x1="174" y1="230" x2="210" y2="230" stroke="#3fb950" stroke-width="1.5"/>
+  <polygon points="206,226 214,230 206,234" fill="#3fb950"/>
+
+  <!-- Stage 2: Transform -->
+  <rect x="214" y="196" width="148" height="68" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect x="214" y="196" width="148" height="3" rx="2" fill="#79c0ff"/>
+  <text x="288" y="223" text-anchor="middle" fill="#e6edf3" font-size="13" font-family="ui-monospace,monospace" font-weight="700">TRANSFORM</text>
+  <text x="288" y="245" text-anchor="middle" fill="#6e7681" font-size="10" font-family="ui-monospace,monospace">Airflow · dbt</text>
+
+  <!-- Arrow -->
+  <line x1="364" y1="230" x2="400" y2="230" stroke="#79c0ff" stroke-width="1.5"/>
+  <polygon points="396,226 404,230 396,234" fill="#79c0ff"/>
+
+  <!-- Stage 3: Store -->
+  <rect x="404" y="196" width="148" height="68" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect x="404" y="196" width="148" height="3" rx="2" fill="#d2a8ff"/>
+  <text x="478" y="223" text-anchor="middle" fill="#e6edf3" font-size="13" font-family="ui-monospace,monospace" font-weight="700">STORE</text>
+  <text x="478" y="245" text-anchor="middle" fill="#6e7681" font-size="10" font-family="ui-monospace,monospace">S3 · PostgreSQL</text>
+
+  <!-- Arrow -->
+  <line x1="554" y1="230" x2="590" y2="230" stroke="#d2a8ff" stroke-width="1.5"/>
+  <polygon points="586,226 594,230 586,234" fill="#d2a8ff"/>
+
+  <!-- Stage 4: Visualize -->
+  <rect x="594" y="196" width="182" height="68" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect x="594" y="196" width="182" height="3" rx="2" fill="#ffa657"/>
+  <text x="685" y="223" text-anchor="middle" fill="#e6edf3" font-size="13" font-family="ui-monospace,monospace" font-weight="700">VISUALIZE</text>
+  <text x="685" y="245" text-anchor="middle" fill="#6e7681" font-size="10" font-family="ui-monospace,monospace">Superset · MLflow</text>
+
+  <!-- Stat cards row -->
+  <rect x="24" y="292" width="172" height="62" rx="4" fill="#0d1117" stroke="#30363d"/>
+  <text x="110" y="320" text-anchor="middle" fill="#3fb950" font-size="24" font-family="ui-monospace,monospace" font-weight="700">68%</text>
+  <text x="110" y="342" text-anchor="middle" fill="#6e7681" font-size="9" font-family="ui-monospace,monospace" letter-spacing="1">COST SAVED</text>
+
+  <rect x="214" y="292" width="172" height="62" rx="4" fill="#0d1117" stroke="#30363d"/>
+  <text x="300" y="320" text-anchor="middle" fill="#79c0ff" font-size="24" font-family="ui-monospace,monospace" font-weight="700">10+</text>
+  <text x="300" y="342" text-anchor="middle" fill="#6e7681" font-size="9" font-family="ui-monospace,monospace" letter-spacing="1">INTEGRATIONS</text>
+
+  <rect x="404" y="292" width="172" height="62" rx="4" fill="#0d1117" stroke="#30363d"/>
+  <text x="490" y="320" text-anchor="middle" fill="#d2a8ff" font-size="24" font-family="ui-monospace,monospace" font-weight="700">IaC</text>
+  <text x="490" y="342" text-anchor="middle" fill="#6e7681" font-size="9" font-family="ui-monospace,monospace" letter-spacing="1">TERRAFORM</text>
+
+  <rect x="594" y="292" width="182" height="62" rx="4" fill="#0d1117" stroke="#30363d"/>
+  <text x="685" y="320" text-anchor="middle" fill="#ffa657" font-size="24" font-family="ui-monospace,monospace" font-weight="700">EKS</text>
+  <text x="685" y="342" text-anchor="middle" fill="#6e7681" font-size="9" font-family="ui-monospace,monospace" letter-spacing="1">KUBERNETES</text>
+
+  <!-- Footer bar -->
+  <rect y="390" width="800" height="60" fill="#161b22"/>
+  <rect y="390" width="800" height="1" fill="#30363d"/>
+  <circle cx="44" cy="418" r="5" fill="#3fb950"/>
+  <text x="58" y="422" fill="#3fb950" font-size="11" font-family="ui-monospace,monospace">3 workers running</text>
+  <text x="58" y="438" fill="#6e7681" font-size="10" font-family="ui-monospace,monospace">Last run: 2 min ago · Next: 58 min</text>
+  <text x="756" y="422" text-anchor="end" fill="#79c0ff" font-size="11" font-family="ui-monospace,monospace">Open Source</text>
+  <text x="756" y="438" text-anchor="end" fill="#6e7681" font-size="10" font-family="ui-monospace,monospace">github.com/sidetrek</text>
+</svg>
