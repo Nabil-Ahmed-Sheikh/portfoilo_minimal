@@ -8,6 +8,7 @@ import { Experience } from '@/components/Experience';
 import { TechStack } from '@/components/TechStack';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
+import { BoredButton } from '@/components/BoredButton';
 
 export default async function Home() {
   const { personal, socialLinks, projects, experience, stack, stats } = await fetchPortfolio();
@@ -25,6 +26,7 @@ export default async function Home() {
         <Contact socialLinks={socialLinks} />
       </main>
       <Footer personal={personal} />
+      <BoredButton />
     </>
   );
 }
