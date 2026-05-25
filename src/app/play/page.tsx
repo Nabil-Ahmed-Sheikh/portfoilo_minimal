@@ -30,6 +30,15 @@ export default function PlayPage() {
           </p>
           <span className={styles.cta}>Play →</span>
         </Link>
+
+        <Link href="/play/memory" className={styles.card}>
+          <p className={styles.tag}>Memory · 20 cards</p>
+          <h2 className={styles.cardTitle}>Tech Tycoon</h2>
+          <p className={styles.cardDesc}>
+            Flip pairs, match the stack. Build your tech portfolio one pair at a time.
+          </p>
+          <span className={styles.cta}>Play →</span>
+        </Link>
       </div>
     </div>
   );
