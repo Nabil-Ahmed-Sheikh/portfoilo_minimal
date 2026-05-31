@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import type { PersonalInfo } from '@/types';
 import styles from './Hero.module.css';
 
-const ROLES = ['Engineer', 'Developer', 'Builder', 'Creator'];
+const DISCIPLINES = ['Software', 'Cloud', 'Systems', 'Full-Stack'];
 const INTERVAL_MS = 2400;
 
 interface HeroProps {
@@ -19,7 +19,7 @@ export function Hero({ personal }: HeroProps) {
   const ctasRef = useRef<HTMLDivElement>(null);
   const photoRef = useRef<HTMLDivElement>(null);
   const emRef = useRef<HTMLElement>(null);
-  const [roleIndex, setRoleIndex] = useState(0);
+  const [disciplineIndex, setDisciplineIndex] = useState(0);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -48,7 +48,7 @@ export function Hero({ personal }: HeroProps) {
         duration: 0.28,
         ease: 'power2.in',
         onComplete: () => {
-          setRoleIndex(i => (i + 1) % ROLES.length);
+          setDisciplineIndex(i => (i + 1) % DISCIPLINES.length);
           gsap.fromTo(
             em,
             { opacity: 0, y: 14 },
@@ -65,9 +65,9 @@ export function Hero({ personal }: HeroProps) {
     <div className={styles.hero}>
       <div className={styles.text}>
         <h1 ref={headingRef} className={styles.heading}>
-          Software
+          <em ref={emRef} className={styles.em}>{DISCIPLINES[disciplineIndex]}</em>
           <br />
-          <em ref={emRef} className={styles.em}>{ROLES[roleIndex]}</em>
+          Engineer
         </h1>
         <p ref={bioRef} className={styles.bio}>{personal.bio}</p>
         <div ref={ctasRef} className={styles.ctas}>

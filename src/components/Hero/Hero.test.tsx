@@ -18,21 +18,21 @@ describe('Hero', () => {
     jest.useRealTimers();
   });
 
-  it('renders the main heading with the first role', () => {
+  it('renders the main heading with the first discipline and static Engineer', () => {
     render(<Hero personal={personal} />);
     expect(screen.getByText('Software')).toBeInTheDocument();
     expect(screen.getByText('Engineer')).toBeInTheDocument();
   });
 
-  it('cycles to the next role after the interval', () => {
+  it('cycles to the next discipline after the interval', () => {
     render(<Hero personal={personal} />);
-    expect(screen.getByText('Engineer')).toBeInTheDocument();
+    expect(screen.getByText('Software')).toBeInTheDocument();
 
     act(() => {
       jest.advanceTimersByTime(2400);
     });
 
-    expect(screen.getByText('Developer')).toBeInTheDocument();
+    expect(screen.getByText('Cloud')).toBeInTheDocument();
   });
 
   it('renders the bio text', () => {
