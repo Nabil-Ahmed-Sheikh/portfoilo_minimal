@@ -55,6 +55,16 @@ export interface PersonalInfo {
   email: string;
 }
 
+export interface Certification {
+  id: string;
+  name: string;
+  issuer: string;
+  category: string;
+  icon: string;
+  year?: string;
+  credentialUrl?: string;
+}
+
 export interface PortfolioData {
   personal: PersonalInfo;
   socialLinks: SocialLink[];

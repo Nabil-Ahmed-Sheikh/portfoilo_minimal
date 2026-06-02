@@ -6,9 +6,11 @@ import { Marquee } from '@/components/Marquee';
 import { Projects } from '@/components/Projects';
 import { Experience } from '@/components/Experience';
 import { TechStack } from '@/components/TechStack';
+import { Certifications } from '@/components/Certifications';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { BoredButton } from '@/components/BoredButton';
+import { certifications } from '@/data/certifications';
 
 export default async function Home() {
   const { personal, socialLinks, projects, experience, stack, stats } = await fetchPortfolio();
@@ -23,6 +25,7 @@ export default async function Home() {
         <Projects projects={projects} />
         <Experience experience={experience} />
         <TechStack stack={stack} />
+        <Certifications certifications={certifications} />
         <Contact socialLinks={socialLinks} />
       </main>
       <Footer personal={personal} />
