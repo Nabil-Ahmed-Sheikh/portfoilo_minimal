@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
+import { MagneticButton } from '@/components/MagneticButton';
 import type { PersonalInfo } from '@/types';
 import styles from './Hero.module.css';
 
@@ -71,12 +72,16 @@ export function Hero({ personal }: HeroProps) {
         </h1>
         <p ref={bioRef} className={styles.bio}>{personal.bio}</p>
         <div ref={ctasRef} className={styles.ctas}>
-          <a href="#projects" className={styles.cta}>
-            View Work ↓
-          </a>
-          <a href="#contact" className={styles.ctaGhost}>
-            Get in Touch
-          </a>
+          <MagneticButton>
+            <a href="#projects" className={styles.cta}>
+              View Work ↓
+            </a>
+          </MagneticButton>
+          <MagneticButton>
+            <a href="#contact" className={styles.ctaGhost}>
+              Get in Touch
+            </a>
+          </MagneticButton>
         </div>
       </div>
 
