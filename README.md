@@ -6,7 +6,6 @@ Personal portfolio and CMS for [Nabil Ahmed](https://github.com/Nabil-Ahmed-Shei
 
 - **Next.js 16** (App Router) · **React 19** · **TypeScript**
 - **CSS Modules** with CSS custom properties for theming (light / dark)
-- **GSAP** for scroll and entrance animations
 - **Jest** + **React Testing Library**
 
 ## Getting started
