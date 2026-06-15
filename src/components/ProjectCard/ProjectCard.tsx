@@ -15,7 +15,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const onMouseEnter = () => {
-    gsap.to(cardRef.current, { y: -6, duration: 0.3, ease: 'power2.out' });
+    gsap.to(cardRef.current, { y: -8, duration: 0.3, ease: 'power2.out' });
   };
   const onMouseLeave = () => {
     gsap.to(cardRef.current, { y: 0, duration: 0.4, ease: 'power2.inOut' });
@@ -28,42 +28,52 @@ export function ProjectCard({ project }: ProjectCardProps) {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {/* Full-card link to detail page — sits behind all interactive children */}
-      <Link href={`/projects/${project.id}`} className={styles.cardOverlay} aria-label={`View ${project.title} details`} />
+      <Link
+        href={`/projects/${project.id}`}
+        className={styles.cardOverlay}
+        aria-label={`View ${project.title} details`}
+      />
 
-      <div className={styles.img}>
+      <div className={styles.imgWrap}>
         {project.coverImage ? (
           <Image
             src={project.coverImage}
             alt={`${project.title} screenshot`}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            style={{ objectFit: 'cover' }}
+            className={styles.img}
           />
         ) : (
           <>
             <div className={styles.imgStripes} />
-            <span className={styles.imgLabel}>Project Screenshot</span>
+            <span className={styles.imgLabel}>Project Preview</span>
           </>
         )}
       </div>
-      <p className={styles.tag}>{project.tag}</p>
-      <h3 className={styles.title}>
-        {project.title}
-        {project.subtitle && <em className={styles.subtitle}>{project.subtitle}</em>}
-      </h3>
-      <p className={styles.desc}>{project.description}</p>
 
-      {project.arrowLabel && (
-        <a
-          href={project.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.arrow}
-        >
-          {project.arrowLabel}
-        </a>
-      )}
+      <div className={styles.body}>
+        <p className={styles.tag}>{project.tag}</p>
+        <h3 className={styles.title}>
+          {project.title}
+          {project.subtitle && <em className={styles.subtitle}>{project.subtitle}</em>}
+        </h3>
+        <p className={styles.desc}>{project.description}</p>
+        <div className={styles.cardFooter}>
+          {project.arrowLabel ? (
+            <a
+              href={project.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.arrow}
+            >
+              {project.arrowLabel}
+            </a>
+          ) : (
+            <span />
+          )}
+          <span className={styles.viewDetail}>View Details →</span>
+        </div>
+      </div>
     </div>
   );
 }

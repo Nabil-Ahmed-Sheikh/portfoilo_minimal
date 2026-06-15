@@ -21,9 +21,13 @@ export default async function Home() {
         <StatsBar stats={stats} />
         <Marquee />
         <Projects projects={projects} />
-        <Experience experience={experience} />
+        <div className="sectionStripe">
+          <Experience experience={experience} />
+        </div>
         <TechStack stack={stack} />
-        <Contact socialLinks={socialLinks} />
+        <div className="sectionStripe">
+          <Contact socialLinks={socialLinks} />
+        </div>
       </main>
       <Footer personal={personal} />
       <BoredButton />

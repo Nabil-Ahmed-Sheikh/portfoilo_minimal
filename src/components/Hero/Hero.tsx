@@ -64,6 +64,7 @@ export function Hero({ personal }: HeroProps) {
 
   return (
     <div className={styles.hero}>
+      <div className={styles.heroBg} aria-hidden="true" />
       <div className={styles.text}>
         <h1 ref={headingRef} className={styles.heading}>
           <em ref={emRef} className={styles.em}>{DISCIPLINES[disciplineIndex]}</em>

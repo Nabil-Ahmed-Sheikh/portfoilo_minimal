@@ -1,61 +1,62 @@
 .card {
   background: var(--bg2);
   border: 1px solid var(--line);
-  padding: 40px;
   cursor: pointer;
-  transition: background 0.25s;
   color: inherit;
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: relative;
   overflow: hidden;
   will-change: transform;
+  transition: border-color 0.3s;
 }
 
-/* Full-area overlay link — sits at z-index 1 so arrow link (z-index 2) stays clickable */
+.card:hover {
+  border-color: color-mix(in oklch, var(--accent) 45%, var(--line));
+}
+
+/* Accent bar sweeps in from left on hover */
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.card:hover::after {
+  transform: scaleX(1);
+}
+
+/* Full-card link — z-index 1 so the arrow link (z-index 2) stays clickable */
 .cardOverlay {
   position: absolute;
   inset: 0;
   z-index: 1;
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-  transform-origin: left;
-}
-
-.card:hover {
+/* Edge-to-edge image */
+.imgWrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  position: relative;
   background: var(--bg);
-  /* GSAP handles translateY */
-}
-
-.card:hover::before {
-  transform: scaleX(1);
+  flex-shrink: 0;
 }
 
 .img {
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  margin-bottom: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ink2);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  position: relative;
-  overflow: hidden;
-  /* position: relative is required for next/image fill */
+  object-fit: cover;
+  transition: transform 0.55s ease;
+}
+
+.card:hover .img {
+  transform: scale(1.04);
 }
 
 .imgStripes {
@@ -71,24 +72,37 @@
 }
 
 .imgLabel {
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+
+/* Text content */
+.body {
+  padding: 28px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .tag {
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .title {
   font-family: var(--font-serif, Georgia, serif);
-  font-size: 1.6rem;
-  margin-bottom: 12px;
+  font-size: 1.55rem;
   line-height: 1.2;
   font-weight: 400;
+  margin-bottom: 0;
 }
 
 .subtitle {
@@ -96,24 +110,57 @@
   font-style: italic;
   color: var(--ink2);
   font-size: 0.85em;
+  margin-top: 4px;
 }
 
 .desc {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: var(--ink2);
-  line-height: 1.6;
+  line-height: 1.65;
+  margin-top: 14px;
+  flex: 1;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  gap: 12px;
 }
 
 .arrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.75rem;
+  gap: 6px;
+  font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-top: 24px;
   text-decoration: none;
   position: relative;
-  z-index: 2; /* sits above the .cardOverlay so it receives clicks */
+  z-index: 2;
+  transition: gap 0.2s ease;
+}
+
+.arrow:hover {
+  gap: 10px;
+}
+
+/* Reveals on card hover */
+.viewDetail {
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.card:hover .viewDetail {
+  opacity: 1;
+  transform: translateX(0);
 }
