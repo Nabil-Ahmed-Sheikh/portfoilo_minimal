@@ -7,10 +7,24 @@
 }
 
 .date {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   color: var(--ink2);
-  padding-top: 4px;
+  padding-top: 6px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.date::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 20%, transparent);
 }
 
 .company {

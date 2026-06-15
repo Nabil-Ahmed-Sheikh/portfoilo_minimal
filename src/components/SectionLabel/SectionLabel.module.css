@@ -1,12 +1,22 @@
 .label {
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink2);
   margin-bottom: 56px;
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.label::before {
+  content: '';
+  display: inline-block;
+  flex-shrink: 0;
+  width: 3px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 2px;
 }
 
 .label::after {

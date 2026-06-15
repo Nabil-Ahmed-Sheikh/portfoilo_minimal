@@ -7,22 +7,22 @@
 :root,
 [data-theme='light'] {
   --bg: oklch(97% 0.008 60);
-  --bg2: oklch(94% 0.010 60);
-  --ink: oklch(14% 0.012 60);
-  --ink2: oklch(45% 0.010 60);
-  --accent: oklch(52% 0.11 160);
-  --accent-light: oklch(90% 0.06 160);
-  --line: oklch(88% 0.010 60);
+  --bg2: oklch(93.5% 0.011 60);
+  --ink: oklch(12% 0.012 60);
+  --ink2: oklch(42% 0.010 60);
+  --accent: oklch(58% 0.16 160);
+  --accent-light: oklch(90% 0.07 160);
+  --line: oklch(87% 0.011 60);
 }
 
 [data-theme='dark'] {
-  --bg: oklch(12% 0.008 60);
-  --bg2: oklch(17% 0.008 60);
-  --ink: oklch(92% 0.005 60);
-  --ink2: oklch(60% 0.006 60);
-  --accent: oklch(52% 0.11 160);
-  --accent-light: oklch(25% 0.06 160);
-  --line: oklch(25% 0.008 60);
+  --bg: oklch(11% 0.008 60);
+  --bg2: oklch(16% 0.009 60);
+  --ink: oklch(93% 0.005 60);
+  --ink2: oklch(62% 0.007 60);
+  --accent: oklch(62% 0.18 160);
+  --accent-light: oklch(26% 0.07 160);
+  --line: oklch(24% 0.009 60);
 }
 
 html {
@@ -41,9 +41,15 @@ body {
   font-size: 16px;
   line-height: 1.6;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   transition:
     background 0.3s ease,
     color 0.3s ease;
+}
+
+.sectionStripe {
+  background: var(--bg2);
 }
 
 ::selection {

@@ -54,10 +54,28 @@
   color: var(--ink2);
   transition: color 0.2s;
   text-decoration: none;
+  position: relative;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s ease;
 }
 
 .link:hover {
   color: var(--ink);
+}
+
+.link:hover::after {
+  transform: scaleX(1);
 }
 
 .resumeBtn {
