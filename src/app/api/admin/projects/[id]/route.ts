@@ -1,8 +1,7 @@
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/admin-guard';
-import { readOverride, writeOverride } from '@/lib/override';
-import { fetchPortfolio } from '@/lib/portfolio';
+import { deleteProject, getProject, upsertProject } from '@/lib/db';
 import { saveUploadedFile } from '@/lib/upload';
 
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -12,8 +11,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
   const { id } = await params;
   const formData = await request.formData();
 
-  const data = await fetchPortfolio();
-  const existing = data.projects.find((p) => p.id === id);
+  const existing = await getProject(id);
   if (!existing) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
@@ -31,13 +29,9 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 
   const imageFiles = formData.getAll('images') as File[];
   let images = existing.images ?? [];
-  const newImages: string[] = [];
   for (const file of imageFiles) {
-    if (file && file.size > 0) {
-      newImages.push(await saveUploadedFile(file, id));
-    }
+    if (file && file.size > 0) images = [...images, await saveUploadedFile(file, id)];
   }
-  if (newImages.length) images = [...images, ...newImages];
 
   const updated = {
     ...existing,
@@ -52,29 +46,18 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     arrowLabel: (formData.get('arrowLabel') as string) || existing.arrowLabel,
     liveHref: (formData.get('liveHref') as string) || existing.liveHref,
     tech: techRaw ? techRaw.split(',').map((s) => s.trim()).filter(Boolean) : existing.tech,
-    highlights:
-      highlightsRaw.filter(Boolean).length
-        ? highlightsRaw.filter(Boolean)
-        : existing.highlights,
+    highlights: highlightsRaw.filter(Boolean).length
+      ? highlightsRaw.filter(Boolean)
+      : existing.highlights,
     coverImage,
     images: images.length ? images : undefined,
     videoUrl: (formData.get('videoUrl') as string) || existing.videoUrl,
   };
 
-  const override = await readOverride();
-  const overrideProjects = override.projects ?? [];
-  const idx = overrideProjects.findIndex((p) => p.id === id);
-  if (idx >= 0) {
-    overrideProjects[idx] = updated;
-  } else {
-    overrideProjects.push(updated);
-  }
-  await writeOverride({ ...override, projects: overrideProjects });
-
+  const saved = await upsertProject(updated);
   revalidatePath('/');
   revalidatePath('/projects/[id]', 'page');
-
-  return NextResponse.json(updated);
+  return NextResponse.json(saved);
 }
 
 export async function DELETE(
@@ -85,16 +68,9 @@ export async function DELETE(
   if (guard) return guard;
 
   const { id } = await params;
-  const override = await readOverride();
-
-  const deletedProjectIds = [...(override.deletedProjectIds ?? [])];
-  if (!deletedProjectIds.includes(id)) deletedProjectIds.push(id);
-
-  const overrideProjects = (override.projects ?? []).filter((p) => p.id !== id);
-  await writeOverride({ ...override, projects: overrideProjects, deletedProjectIds });
+  await deleteProject(id);
 
   revalidatePath('/');
   revalidatePath('/projects/[id]', 'page');
-
   return NextResponse.json({ ok: true });
 }

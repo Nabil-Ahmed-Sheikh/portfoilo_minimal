@@ -1,15 +1,14 @@
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/admin-guard';
-import { readOverride, writeOverride } from '@/lib/override';
-import { fetchPortfolio } from '@/lib/portfolio';
+import { getStack, upsertStack } from '@/lib/db';
 
 export async function GET() {
   const guard = await requireAdmin();
   if (guard) return guard;
 
-  const data = await fetchPortfolio();
-  return NextResponse.json(data.stack);
+  const stack = await getStack();
+  return NextResponse.json(stack);
 }
 
 export async function POST(request: NextRequest) {
@@ -24,11 +23,7 @@ export async function POST(request: NextRequest) {
     icon: body.icon,
   };
 
-  const override = await readOverride();
-  const existing = override.stack ?? [];
-  existing.push(entry);
-  await writeOverride({ ...override, stack: existing });
-
+  const saved = await upsertStack(entry);
   revalidatePath('/');
-  return NextResponse.json(entry, { status: 201 });
+  return NextResponse.json(saved, { status: 201 });
 }

@@ -1,16 +1,22 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { getSupabase } from './supabase';
 
-// FUTURE: Upload to S3/Cloudinary/Vercel Blob instead, return the remote URL
+const BUCKET = 'portfolio-images';
+
 export async function saveUploadedFile(file: File, projectId: string): Promise<string> {
-  const safeProjectId = projectId.replace(/[^a-z0-9-_]/gi, '-');
-  const dir = path.join(process.cwd(), 'public', 'uploads', safeProjectId);
-  await fs.mkdir(dir, { recursive: true });
+  const sb = getSupabase();
+  const safeId = projectId.replace(/[^a-z0-9-_]/gi, '-');
+  const safeName = file.name.replace(/[^a-z0-9._-]/gi, '-').toLowerCase();
+  const storagePath = `${safeId}/${Date.now()}-${safeName}`;
 
-  const safeName = file.name.replace(/[^a-z0-9._-]/gi, '-');
-  const filePath = path.join(dir, safeName);
   const bytes = Buffer.from(await file.arrayBuffer());
-  await fs.writeFile(filePath, bytes);
 
-  return `/uploads/${safeProjectId}/${safeName}`;
+  const { error } = await sb.storage.from(BUCKET).upload(storagePath, bytes, {
+    contentType: file.type || 'application/octet-stream',
+    upsert: true,
+  });
+
+  if (error) throw new Error(`Image upload failed: ${error.message}`);
+
+  const { data } = sb.storage.from(BUCKET).getPublicUrl(storagePath);
+  return data.publicUrl;
 }
