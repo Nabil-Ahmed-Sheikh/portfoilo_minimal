@@ -1,15 +1,14 @@
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/admin-guard';
-import { readOverride, writeOverride } from '@/lib/override';
-import { fetchPortfolio } from '@/lib/portfolio';
+import { getExperience, upsertExperience } from '@/lib/db';
 
 export async function GET() {
   const guard = await requireAdmin();
   if (guard) return guard;
 
-  const data = await fetchPortfolio();
-  return NextResponse.json(data.experience);
+  const experience = await getExperience();
+  return NextResponse.json(experience);
 }
 
 export async function POST(request: NextRequest) {
@@ -25,11 +24,7 @@ export async function POST(request: NextRequest) {
     description: body.description,
   };
 
-  const override = await readOverride();
-  const existing = override.experience ?? [];
-  existing.push(entry);
-  await writeOverride({ ...override, experience: existing });
-
+  const saved = await upsertExperience(entry);
   revalidatePath('/');
-  return NextResponse.json(entry, { status: 201 });
+  return NextResponse.json(saved, { status: 201 });
 }

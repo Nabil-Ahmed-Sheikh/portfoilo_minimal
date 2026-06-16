@@ -10,28 +10,16 @@ jest.mock('@/lib/admin-guard', () => ({
   requireAdmin: jest.fn(() => Promise.resolve(null)),
 }));
 
-const mockReadOverride = jest.fn(() => Promise.resolve({}));
-const mockWriteOverride = jest.fn(() => Promise.resolve());
+const mockGetProjects = jest.fn(() =>
+  Promise.resolve([
+    { id: 'proj-1', title: 'Alpha', tag: 'OSS', description: 'desc', href: 'https://github.com/a' },
+  ]),
+);
+const mockUpsertProject = jest.fn((p: unknown) => Promise.resolve(p));
 
-jest.mock('@/lib/override', () => ({
-  readOverride: () => mockReadOverride(),
-  writeOverride: (...args: unknown[]) => mockWriteOverride(...args),
-}));
-
-jest.mock('@/lib/portfolio', () => ({
-  fetchPortfolio: jest.fn(() =>
-    Promise.resolve({
-      projects: [
-        {
-          id: 'proj-1',
-          title: 'Alpha',
-          tag: 'OSS',
-          description: 'desc',
-          href: 'https://github.com/a',
-        },
-      ],
-    }),
-  ),
+jest.mock('@/lib/db', () => ({
+  getProjects: () => mockGetProjects(),
+  upsertProject: (p: unknown) => mockUpsertProject(p),
 }));
 
 jest.mock('@/lib/upload', () => ({
@@ -81,6 +69,6 @@ describe('POST /api/admin/projects', () => {
     expect(res.status).toBe(201);
     const json = await res.json();
     expect(json.title).toBe('Beta');
-    expect(mockWriteOverride).toHaveBeenCalled();
+    expect(mockUpsertProject).toHaveBeenCalled();
   });
 });

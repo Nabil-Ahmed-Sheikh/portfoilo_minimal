@@ -19,6 +19,10 @@ jest.mock('resend', () => {
   };
 });
 
+jest.mock('@/lib/db', () => ({
+  saveContactMessage: jest.fn(() => Promise.resolve()),
+}));
+
 beforeAll(async () => {
   const mod = await import('resend');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
