@@ -1,12 +1,16 @@
 import { NextResponse } from 'next/server';
 import { getSupabase, isConfigured } from '@/lib/supabase';
 
-const REQUIRED_ENV = [
-  'NEXT_PUBLIC_SUPABASE_URL',
-  'SUPABASE_SERVICE_ROLE_KEY',
-  'JWT_SECRET',
-  'ADMIN_PASSWORD',
-] as const;
+// Each entry is a list of accepted names — any one present = satisfied
+const REQUIRED_ENV: { label: string; vars: string[] }[] = [
+  { label: 'NEXT_PUBLIC_SUPABASE_URL', vars: ['NEXT_PUBLIC_SUPABASE_URL'] },
+  {
+    label: 'SUPABASE_SECRET_KEY (or SUPABASE_SERVICE_ROLE_KEY)',
+    vars: ['SUPABASE_SECRET_KEY', 'SUPABASE_SERVICE_ROLE_KEY'],
+  },
+  { label: 'JWT_SECRET', vars: ['JWT_SECRET'] },
+  { label: 'ADMIN_PASSWORD', vars: ['ADMIN_PASSWORD'] },
+];
 
 interface CheckResult {
   status: 'ok' | 'error';
@@ -65,7 +69,10 @@ function checkEmail(): CheckResult {
 }
 
 function checkEnv(): EnvCheckResult {
-  const missing = REQUIRED_ENV.filter((k) => !process.env[k]);
+  const missing = REQUIRED_ENV.filter((entry) =>
+    entry.vars.every((v) => !process.env[v]),
+  ).map((entry) => entry.label);
+
   return {
     status: missing.length === 0 ? 'ok' : 'error',
     latency_ms: 0,

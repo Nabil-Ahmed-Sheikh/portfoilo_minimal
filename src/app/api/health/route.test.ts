@@ -25,7 +25,7 @@ beforeEach(() => {
   process.env = {
     ...OLD_ENV,
     NEXT_PUBLIC_SUPABASE_URL: 'https://test.supabase.co',
-    SUPABASE_SERVICE_ROLE_KEY: 'test-service-key',
+    SUPABASE_SECRET_KEY: 'test-secret-key',   // new dashboard name
     JWT_SECRET: 'test-jwt-secret',
     ADMIN_PASSWORD: 'test-admin-pw',
     RESEND_API_KEY: 'test-resend-key',
@@ -105,9 +105,26 @@ describe('GET /api/health', () => {
     const res = await GET();
     const json = await res.json();
     expect(json.checks.env.status).toBe('error');
-    expect(json.checks.env.missing).toEqual(
-      expect.arrayContaining(['JWT_SECRET', 'ADMIN_PASSWORD']),
-    );
+    // missing labels contain the var name (possibly with alternatives)
+    const missingStr = json.checks.env.missing.join(' ');
+    expect(missingStr).toMatch(/JWT_SECRET/);
+    expect(missingStr).toMatch(/ADMIN_PASSWORD/);
+  });
+
+  it('accepts SUPABASE_SECRET_KEY as the new-dashboard secret key name', async () => {
+    delete process.env.SUPABASE_SERVICE_ROLE_KEY;
+    process.env.SUPABASE_SECRET_KEY = 'new-style-key';
+    const res = await GET();
+    const json = await res.json();
+    expect(json.checks.env.status).toBe('ok');
+  });
+
+  it('accepts SUPABASE_SERVICE_ROLE_KEY as the legacy secret key name', async () => {
+    delete process.env.SUPABASE_SECRET_KEY;
+    process.env.SUPABASE_SERVICE_ROLE_KEY = 'legacy-key';
+    const res = await GET();
+    const json = await res.json();
+    expect(json.checks.env.status).toBe('ok');
   });
 
   it('reports error when Supabase not configured', async () => {
